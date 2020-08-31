@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  font-family: 'Raleway', sans-serif;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+
+.container {
+  position: relative;
+  width: 320px;
+  height: 80vh;
+  margin: auto;
+}
+
+.container > div {
+  position: absolute;
+  width: 320px;
+  overflow: visible;
+  pointer-events: auto;
+  transform-origin: 50% 50% 0px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  background: lightblue;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.container > div:nth-child(1) {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+.container > div:nth-child(2) {
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+.container > div:nth-child(3) {
+  background: linear-gradient(135deg, #b7e7b3 0%, #dbe250 100%);
+}
+.container > div:nth-child(4) {
+  background: linear-gradient(135deg, #b0c5e7 0%, #9ee79e 100%);
+}
+.container > div:nth-child(5) {
+  background: linear-gradient(135deg, #50479b 0%, #566de0 100%);
+}
+.container > div:nth-child(6) {
+  background: linear-gradient(135deg, #c6a1dd 0%, #302eaa 100%);
+}
+.container > div:nth-child(7) {
+  background: linear-gradient(135deg, #2c2e2c 0%, #812be4 100%);
+}
+.container > div:nth-child(8) {
+  background: linear-gradient(135deg, #f3eef2 0%, #2c2c28 100%);
+}
+.container > div:nth-child(9) {
+  background: linear-gradient(135deg, #e41bda 0%, #e6ded6 100%);
+}
+.container > div:nth-child(10) {
+  background: linear-gradient(135deg, #e94343 0%, #df9edc 100%);
+}
+
+.top-menu-box {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.score-box {
+  text-align: center;
+  color: #bda6d6;
+}
+
+.score-text,.time-text  {
+  font-size: 14px;
+}
+
+.score,.time  {
+  font-size: 40px;
+}
+
+.play-again-box, .go-to-main-menu-box {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.omega-footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  color: #c6a1dd;
+  font-size: 12px;
+}
+
+@media (max-width: 1199.98px) {
+
+}
+
+@media (max-width: 991.98px) {
+
+}
+
+@media (max-width: 899.99px) {
+
+}
+
+@media ( max-width: 812px) and (max-height: 414px) {
+
+}
+
+@media ( max-width: 768px) and (max-height: 1024px) {
+
+}
+
+@media (max-width: 767.98px) {
+
+}
+
+@media (max-width: 575.98px) {
+
+}
+
+@media (max-height: 375px) {
+
+}
+
+@media (max-width: 320px) {
+
+}
+
+@media (max-width: 260px) {
+
+}
