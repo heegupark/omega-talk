@@ -13,85 +13,97 @@ body {
   font-family: 'Raleway', sans-serif;
   justify-content: center;
   align-items: center;
-  background: black;
+  background: rgb(252, 226, 0);
 }
 
-.container {
-  position: relative;
-  width: 320px;
-  height: 80vh;
-  margin: auto;
-}
-
-.container > div {
-  position: absolute;
-  width: 320px;
-  overflow: visible;
-  pointer-events: auto;
-  transform-origin: 50% 50% 0px;
-  border-radius: 5px;
-  color: white;
-  text-align: center;
-  font-size: 24px;
-  background: lightblue;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor: pointer;
-}
-
-.container > div:nth-child(1) {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-.container > div:nth-child(2) {
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-}
-.container > div:nth-child(3) {
-  background: linear-gradient(135deg, #b7e7b3 0%, #dbe250 100%);
-}
-.container > div:nth-child(4) {
-  background: linear-gradient(135deg, #b0c5e7 0%, #9ee79e 100%);
-}
-.container > div:nth-child(5) {
-  background: linear-gradient(135deg, #50479b 0%, #566de0 100%);
-}
-.container > div:nth-child(6) {
-  background: linear-gradient(135deg, #c6a1dd 0%, #302eaa 100%);
-}
-.container > div:nth-child(7) {
-  background: linear-gradient(135deg, #2c2e2c 0%, #812be4 100%);
-}
-.container > div:nth-child(8) {
-  background: linear-gradient(135deg, #f3eef2 0%, #2c2c28 100%);
-}
-.container > div:nth-child(9) {
-  background: linear-gradient(135deg, #e41bda 0%, #e6ded6 100%);
-}
-.container > div:nth-child(10) {
-  background: linear-gradient(135deg, #e94343 0%, #df9edc 100%);
-}
-
-.top-menu-box {
+.box {
   display: flex;
-  justify-content: space-between;
+  justify-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 5px;
+  animation: fade-in 0.2s ease-in;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.left {
+  max-width: 80px;
+  min-width: 80px;
+  height: 100%;
+  border-radius: 5px 0px 0px 5px;
+  background-color: rgb(66, 54, 48);
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.minimized {
+  width: 80px;
+  height: 22px;
+  border-radius: 5px;
+  background-color: rgb(66, 54, 48);
+  margin-bottom: 10px;
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.main-chat {
+  cursor: default;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 0px 5px 5px 0px;
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.circle-menu {
+  width: 100%;
+  height: 20px;
+}
+
+.circle-menu-box {
+  cursor: default;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+  padding: 0px 3px;
+}
+
+.circle-menu-box > i {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  font-size: 10px;
+  text-align: center;
   margin: auto;
+  padding-right: 0.3px;
+  padding-top: 1px;
 }
 
-.score-box {
-  text-align: center;
-  color: #bda6d6;
+.circle-menu-box > i:hover {
+  color: black;
 }
 
-.score-text,.time-text  {
-  font-size: 14px;
+.close {
+  color: rgb(255, 97, 89);
+  background-color: rgb(255, 97, 89);
 }
 
-.score,.time  {
-  font-size: 40px;
+.minimize {
+  color: rgb(255, 192, 47);
+  background-color: rgb(255, 192, 47);
 }
 
-.play-again-box, .go-to-main-menu-box {
-  margin-top: 8px;
-  text-align: center;
+.expand {
+  color: rgb(37, 204, 62);
+  background-color: rgb(37, 204, 62);
 }
 
 .omega-footer {
@@ -99,46 +111,36 @@ body {
   bottom: 0px;
   width: 100%;
   text-align: center;
-  color: #c6a1dd;
+  color: rgb(66, 54, 48);
   font-size: 12px;
 }
 
 @media (max-width: 1199.98px) {
-
 }
 
 @media (max-width: 991.98px) {
-
 }
 
 @media (max-width: 899.99px) {
-
 }
 
-@media ( max-width: 812px) and (max-height: 414px) {
-
+@media (max-width: 812px) and (max-height: 414px) {
 }
 
-@media ( max-width: 768px) and (max-height: 1024px) {
-
+@media (max-width: 768px) and (max-height: 1024px) {
 }
 
 @media (max-width: 767.98px) {
-
 }
 
 @media (max-width: 575.98px) {
-
 }
 
 @media (max-height: 375px) {
-
 }
 
 @media (max-width: 320px) {
-
 }
 
 @media (max-width: 260px) {
-
 }
