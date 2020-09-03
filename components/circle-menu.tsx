@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CircleMenu(props) {
+export default function CircleMenu(props: any) {
   return (
     <div className="circle-menu-box">
       <i className="close fas fa-times"></i>
