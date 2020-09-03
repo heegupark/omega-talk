@@ -25,36 +25,45 @@ export default function Main() {
   });
   const { vertical, horizontal, open } = state;
 
-  const handleClose = () => {
+  const closeMinimize = () => {
     setState({ ...state, open: false });
+  };
+
+  const expand = () => {
+    setTempPosition({ x: position.x, y: position.y });
+    setPosition({ x: 0, y: 0 });
+    if (!isMinimized) setTempSize({ width: size.width, height: size.height });
+    setSize({ width: window.innerWidth, height: window.innerHeight });
+    setIsDraggable(false);
+    setIsExpanded(true);
+  };
+
+  const shrink = () => {
+    setPosition({ x: tempPosition.x, y: tempPosition.y });
+    setSize({ width: tempSize.width, height: tempSize.height });
+    setIsDraggable(true);
+    setIsExpanded(false);
   };
 
   const handleExpand = () => {
     if (isMinimized) {
       setIsMinimized(false);
-      handleClose();
-    }
-    if (isExpanded) {
-      setPosition({ x: tempPosition.x, y: tempPosition.y });
-      setSize({ width: tempSize.width, height: tempSize.height });
-      setIsDraggable(true);
+      closeMinimize();
+      expand();
     } else {
-      if (!isMinimized) setTempPosition({ x: position.x, y: position.y });
-      setPosition({ x: 0, y: 0 });
-      setTempSize({ width: size.width, height: size.height });
-      setSize({ width: window.innerWidth, height: window.innerHeight });
-      setIsDraggable(false);
+      if (isExpanded) {
+        shrink();
+      } else {
+        expand();
+      }
     }
-    setIsExpanded(!isExpanded);
   };
 
   const handleMinimize = () => {
     if (isMinimized) {
-      setPosition({ x: position.x, y: tempPosition.y });
-      handleClose();
+      setPosition({ x: position.x, y: position.y });
+      closeMinimize();
     } else {
-      setTempPosition({ x: position.x, y: position.y });
-      // setPosition({ x: position.x, y: window.innerHeight - 50 });
       setState({ open: true, vertical: 'bottom', horizontal: 'center' });
     }
     setIsMinimized(!isMinimized);
@@ -108,7 +117,7 @@ export default function Main() {
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
         open={open}
-        // onClose={handleClose}
+        // onClose={closeMinimize}
         key={vertical + horizontal}
       >
         <span className="minimized">
