@@ -1,8 +1,8 @@
 import React from 'react';
 import Popover from '@material-ui/core/Popover';
 import CreateChatroom from './create-chatroom';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-const useStyles = makeStyles((theme: Theme) =>
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles(() =>
   createStyles({
     paper: {
       height: '100%',
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ChatMainHead() {
+export default function ChatMainHead(props) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -66,7 +66,10 @@ export default function ChatMainHead() {
           horizontal: 'center',
         }}
       >
-        <CreateChatroom handleClose={handleClose} />
+        <CreateChatroom
+          handleClose={handleClose}
+          createChatroom={props.createChatroom}
+        />
       </Popover>
     </div>
   );

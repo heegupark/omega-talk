@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -62,18 +62,39 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CreateChatroom(props) {
+export default function CreateChatroom(props: any) {
   const classes = useStyles();
+  const [roomname, setRoomname] = useState('');
+  const [label, setLabel] = useState('Type room name');
+  const [error, setError] = useState(false);
+
+  const handleCreateBtnBlick = () => {
+    if (roomname.length < 1) {
+      setError(true);
+      setLabel('Please type room name');
+    } else {
+      setError(false);
+      setLabel('Type room name');
+      props.handleClose();
+      props.createChatroom(roomname);
+    }
+  };
+
   return (
     <div className={classes.box}>
       <div className={classes.title}>Create Chatroom</div>
       <div className={classes.middle}>
         <TextField
+          error={error}
           className={classes.input}
           id="outlined-basic"
-          label="Type room name"
+          label={label}
           variant="outlined"
           size="small"
+          value={roomname}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setRoomname(e.target.value);
+          }}
           autoComplete="off"
           inputProps={{ style: { fontSize: 12 } }}
           InputLabelProps={{ style: { fontSize: 12 } }}
@@ -83,6 +104,7 @@ export default function CreateChatroom(props) {
         <Button
           disableElevation
           className={classes.createBtn}
+          onClick={handleCreateBtnBlick}
           variant="contained"
         >
           Create
