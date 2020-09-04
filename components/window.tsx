@@ -28,6 +28,7 @@ export default function Window(props: any) {
   const [tempSize, setTempSize] = useState({ width: 400, height: 640 });
   // const [zIndex, setZIndex] = useState(props.window ? props.window.zIndex : 0);
   const [zIndex, setZIndex] = useState(0);
+  const [marginLeft, setMarginLeft] = useState(0);
   let [isExpanded, setIsExpanded] = useState(false);
   let [isMinimized, setIsMinimized] = useState(false);
   let [isDraggable, setIsDraggable] = useState(true);
@@ -38,10 +39,10 @@ export default function Window(props: any) {
 
   const [state, setState] = React.useState<State>({
     open: false,
-    vertical: 'top',
-    horizontal: 'center',
+    vertical: 'bottom',
+    horizontal: 'left',
   });
-  const { vertical, horizontal, open } = state;
+  const { open, vertical, horizontal } = state;
 
   const closeMinimize = () => {
     setState({ ...state, open: false });
@@ -78,17 +79,24 @@ export default function Window(props: any) {
   };
 
   const handleMinimize = () => {
+    console.log(document.querySelectorAll('#minimized').length);
+    const numOfMinimized = document.querySelectorAll('#minimized').length;
+    setMarginLeft(numOfMinimized * 100);
     if (isMinimized) {
       setPosition({ x: position.x, y: position.y });
       closeMinimize();
     } else {
-      setState({ open: true, vertical: 'bottom', horizontal: 'center' });
+      setState({ open: true, vertical: 'bottom', horizontal: 'left' });
     }
     setIsMinimized(!isMinimized);
   };
 
   const handleCloseWindow = () => {
     console.log('close');
+    if (props.window) {
+      console.log(props.window._id);
+      props.closeWindow(props.window._id);
+    }
   };
 
   let element = null;
@@ -97,6 +105,8 @@ export default function Window(props: any) {
       element = (
         <div className="username-box">
           <EnterUsername
+            handleExpand={handleExpand}
+            handleMinimize={handleMinimize}
             handleCloseWindow={handleCloseWindow}
             setUsername={props.setUsername}
           />
@@ -107,7 +117,7 @@ export default function Window(props: any) {
       element = (
         <div className="main-box">
           <Left
-            handleCloseWind={handleCloseWindow}
+            handleCloseWindow={handleCloseWindow}
             handleMinimize={handleMinimize}
             handleExpand={handleExpand}
           />
@@ -170,13 +180,21 @@ export default function Window(props: any) {
         </Rnd>
       )}
       <Snackbar
+        id="minimized"
+        style={{ marginLeft }}
         anchorOrigin={{ vertical, horizontal }}
         open={open}
-        // onClose={closeMinimize}
         key={vertical + horizontal}
       >
-        <span className="minimized">
-          <Left handleMinimize={handleMinimize} handleExpand={handleExpand} />
+        <span className="minimized-box">
+          <Left
+            styleCategory="minimized"
+            category={props.category}
+            handleCloseWindow={handleCloseWindow}
+            window={props.window}
+            handleMinimize={handleMinimize}
+            handleExpand={handleExpand}
+          />
         </span>
       </Snackbar>
     </>

@@ -27,10 +27,15 @@ export default function Main() {
         }
         return item;
       });
-      console.log(newWindows);
       setWindows(newWindows as any);
     }
   };
+
+  const closeWindow = (_id: any) => {
+    const newWindows = windows.filter((item: any) => item._id !== _id);
+    setWindows(newWindows as any);
+  };
+
   return (
     <>
       {username ? (
@@ -50,6 +55,7 @@ export default function Main() {
                 zIndex={window.zIndex}
                 maxZIndex={maxZIndex}
                 category="chat-room"
+                closeWindow={closeWindow}
                 setMaxZIndex={setMaxZIndex}
               />
             );

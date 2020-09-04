@@ -60,8 +60,25 @@ body {
   min-width: 80px;
   height: 100%;
   border-radius: 5px 0px 0px 5px;
-  background-color: rgb(66, 54, 48);
+  /* background-color: rgb(66, 54, 48); */
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.minimized {
+  max-width: 80px;
+  min-width: 80px;
+  height: 100%;
+  border-radius: 5px;
+  /* background-color: rgb(66, 54, 48); */
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-brown {
+  background-color: rgb(66, 54, 48);
 }
 
 .top-box {
@@ -151,11 +168,10 @@ body {
   outline: none;
 }
 
-.minimized {
+.minimized-box {
   width: 80px;
   height: 22px;
   border-radius: 5px;
-  background-color: rgb(66, 54, 48);
   margin-bottom: 10px;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
@@ -308,7 +324,7 @@ body {
 }
 
 .chat-bubble {
-  margin-top: 15%;
+  margin-top: 25%;
   color: rgb(255, 229, 0);
   font-size: 100px;
 }

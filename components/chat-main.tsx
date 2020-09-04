@@ -43,7 +43,6 @@ export default function ChatMain(props: any) {
   };
 
   const createChatroom = (roomname: String) => {
-    console.log('createChatroom');
     create(roomname);
   };
 
