@@ -9,21 +9,6 @@ const useStyles = makeStyles(() =>
       borderRadius: '5px',
       border: '1px solid rgb(228, 228, 228)',
     },
-    head: {
-      margin: '13px',
-      color: 'rgb(66, 54, 48)',
-      height: '30px',
-    },
-    title: {
-      float: 'left',
-      fontWeight: 800,
-      fontSize: '18px',
-    },
-    bubble: {
-      float: 'right',
-      cursor: 'pointer',
-      fontSize: '24px',
-    },
   })
 );
 
@@ -46,9 +31,9 @@ export default function ChatMainHead(props: any) {
   const id = open ? 'simple-popover' : undefined;
 
   return (
-    <div className={classes.head}>
-      <span className={classes.title}>Chats</span>
-      <span className={classes.bubble} onClick={handleClick}>
+    <div className="chat-head">
+      <span className="chat-head-title">Chats</span>
+      <span className="chat-head-bubble cursor-pointer" onClick={handleClick}>
         <i className="fas fa-comment-medical"></i>
       </span>
       <Popover

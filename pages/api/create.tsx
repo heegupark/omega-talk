@@ -7,7 +7,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   try {
     const newRoom = new Room({ roomname });
     await newRoom.save();
-    return response.status(201).json({ success: true, data: { roomname } });
+    return response.status(201).json({ success: true, room: newRoom });
   } catch (e) {
     return response
       .status(500)

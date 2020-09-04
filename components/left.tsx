@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import CircleMenu from '../components/circle-menu';
 
-export default function Left(props) {
+export default function Left(props: any) {
   return (
-    <>
-      <div className="circle-menu">
-        <CircleMenu
-          handleExpand={props.handleExpand}
-          handleMinimize={props.handleMinimize}
-        />
-      </div>
-    </>
+    <div className="left">
+      <CircleMenu
+        handleCloseWindow={props.handleCloseWindow}
+        handleExpand={props.handleExpand}
+        handleMinimize={props.handleMinimize}
+      />
+    </div>
   );
 }

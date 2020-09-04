@@ -68,7 +68,7 @@ export default function CreateChatroom(props: any) {
   const [label, setLabel] = useState('Type room name');
   const [error, setError] = useState(false);
 
-  const handleCreateBtnBlick = () => {
+  const handleCreateBtnClick = () => {
     if (roomname.length < 1) {
       setError(true);
       setLabel('Please type room name');
@@ -104,7 +104,7 @@ export default function CreateChatroom(props: any) {
         <Button
           disableElevation
           className={classes.createBtn}
-          onClick={handleCreateBtnBlick}
+          onClick={handleCreateBtnClick}
           variant="contained"
         >
           Create

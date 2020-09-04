@@ -3,7 +3,7 @@
     "development": {
       "plugins": [
         [
-          "babel-plugin-styled-components",
+          "styled-components",
           {
             "ssr": true,
             "displayName": true,
@@ -16,7 +16,7 @@
     "production": {
       "plugins": [
         [
-          "babel-plugin-styled-components",
+          "styled-components",
           {
             "ssr": true,
             "displayName": true,
@@ -29,7 +29,7 @@
   },
   "plugins": [
     [
-      "babel-plugin-styled-components",
+      "styled-components",
       {
         "ssr": true,
         "displayName": true,

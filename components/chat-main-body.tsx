@@ -1,42 +1,6 @@
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import PermIdentityIcon from '@material-ui/icons/PermIdentity';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    head: {
-      margin: '13px',
-      color: 'rgb(66, 54, 48)',
-    },
-    iconbox: {
-      width: '50px',
-    },
-    icon: {
-      color: 'rgb(203,214,242)',
-      backgroundColor: 'rgb(160,182,233)',
-      borderRadius: '30%',
-      width: '40px',
-      height: '40px',
-    },
-    room: {
-      height: '30px',
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'row',
-    },
-    roomname: {
-      paddingTop: '5px',
-      width: '60%',
-    },
-    date: {
-      color: 'rgb(173,173,173)',
-      fontSize: '13px',
-    },
-  })
-);
 
 export default function ChatMainBody(props: any) {
-  const classes = useStyles();
   const monthNames = [
     'Jan',
     'Feb',
@@ -70,17 +34,26 @@ export default function ChatMainBody(props: any) {
     }
     return date;
   };
+
+  const openChatroom = (_id: any, roomname: any) => {
+    props.openWindow(_id, roomname);
+  };
+
   return (
-    <div className={classes.head}>
+    <div className="chat-main-body">
       {props.rooms.map((room: any) => {
         const date = convertDate(room.updatedAt);
         return (
-          <div key={room._id} className={classes.room}>
-            <div className={classes.iconbox}>
-              <PermIdentityIcon className={classes.icon} />
+          <div
+            key={room._id}
+            className="chat-room-row cursor-pointer"
+            onClick={() => openChatroom(room._id, room.roomname)}
+          >
+            <div className="icon-box">
+              <i className="far fa-user"></i>
             </div>
-            <div className={classes.roomname}>{room.roomname}</div>
-            <div className={classes.date}>{date}</div>
+            <div className="room-name">{room.roomname}</div>
+            <div className="room-date">{date}</div>
           </div>
         );
       })}

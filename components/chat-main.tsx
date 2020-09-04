@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ChatMainHead from './chat-main-head';
 import ChatMainBody from './chat-main-body';
 
-export default function ChatMain() {
+export default function ChatMain(props: any) {
   const [rooms, setRooms] = useState([]);
   const getRooms = () => {
     fetch('/api/rooms', {
@@ -13,7 +13,6 @@ export default function ChatMain() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.rooms);
         if (data.success) setRooms(data.rooms);
       })
       .catch((err) => {
@@ -35,7 +34,8 @@ export default function ChatMain() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        const newRooms = [data.room, ...rooms] as any;
+        if (data.success) setRooms(newRooms);
       })
       .catch((err) => {
         console.error(`Something wrong happened while creating:${err.message}`);
@@ -48,9 +48,9 @@ export default function ChatMain() {
   };
 
   return (
-    <>
+    <div className="main-chat">
       <ChatMainHead createChatroom={createChatroom} />
-      <ChatMainBody rooms={rooms} />
-    </>
+      <ChatMainBody rooms={rooms} openWindow={props.openWindow} />
+    </div>
   );
 }

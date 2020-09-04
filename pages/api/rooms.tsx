@@ -7,6 +7,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   const skip = request.query.skip;
   try {
     const rooms = await Room.find()
+      .sort({ updatedAt: -1 })
       .limit(Number(limit))
       .skip(Number(skip))
       .exec();
