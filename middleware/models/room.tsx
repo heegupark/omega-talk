@@ -17,6 +17,18 @@ const roomSchema: Schema = new mongoose.Schema(
   }
 );
 
-const Room = mongoose.model<IRoom>('Room', roomSchema);
+// if (!modelAlreadyDeclared()) {
+//   const Room = mongoose.model<IRoom>('Room', roomSchema);
+//   // export default Room;
+// }
 
+// function modelAlreadyDeclared() {
+//   try {
+//     mongoose.model('Room'); // it throws an error if the model is still not defined
+//     return true;
+//   } catch (e) {
+//     return false;
+//   }
+// }
+const Room = mongoose.models.Room || mongoose.model<IRoom>('Room', roomSchema);
 export default Room;

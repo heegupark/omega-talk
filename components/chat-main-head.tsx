@@ -12,6 +12,7 @@ const useStyles = makeStyles(() =>
     head: {
       margin: '13px',
       color: 'rgb(66, 54, 48)',
+      height: '30px',
     },
     title: {
       float: 'left',
@@ -19,8 +20,8 @@ const useStyles = makeStyles(() =>
       fontSize: '18px',
     },
     bubble: {
-      cursor: 'pointer',
       float: 'right',
+      cursor: 'pointer',
       fontSize: '24px',
     },
   })
