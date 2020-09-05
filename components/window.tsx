@@ -29,6 +29,7 @@ export default function Window(props: any) {
   // const [zIndex, setZIndex] = useState(props.window ? props.window.zIndex : 0);
   const [zIndex, setZIndex] = useState(0);
   const [marginLeft, setMarginLeft] = useState(0);
+  const [isCloseMainWindow, setIsCloseMainWindow] = useState(false);
   let [isExpanded, setIsExpanded] = useState(false);
   let [isMinimized, setIsMinimized] = useState(false);
   let [isDraggable, setIsDraggable] = useState(true);
@@ -79,7 +80,6 @@ export default function Window(props: any) {
   };
 
   const handleMinimize = () => {
-    console.log(document.querySelectorAll('#minimized').length);
     const numOfMinimized = document.querySelectorAll('#minimized').length;
     setMarginLeft(numOfMinimized * 100);
     if (isMinimized) {
@@ -92,11 +92,18 @@ export default function Window(props: any) {
   };
 
   const handleCloseWindow = () => {
-    console.log('close');
     if (props.window) {
-      console.log(props.window._id);
       props.closeWindow(props.window._id);
+    } else {
+      setIsCloseMainWindow(true);
+      setIsMinimized(false);
+      setState({ open: true, vertical: 'top', horizontal: 'left' });
     }
+  };
+
+  const openMainWindow = () => {
+    setIsCloseMainWindow(false);
+    setState({ ...state, open: false });
   };
 
   let element = null;
@@ -142,7 +149,7 @@ export default function Window(props: any) {
 
   return (
     <>
-      {!isMinimized && (
+      {!isMinimized && !isCloseMainWindow && (
         <Rnd
           default={{
             x: position.x,
@@ -186,16 +193,25 @@ export default function Window(props: any) {
         open={open}
         key={vertical + horizontal}
       >
-        <span className="minimized-box">
-          <Left
-            styleCategory="minimized"
-            category={props.category}
-            handleCloseWindow={handleCloseWindow}
-            window={props.window}
-            handleMinimize={handleMinimize}
-            handleExpand={handleExpand}
-          />
-        </span>
+        {isCloseMainWindow ? (
+          <span
+            onClick={() => openMainWindow()}
+            className="closed-box bg-brown cursor-pointer"
+          >
+            +
+          </span>
+        ) : (
+          <span className="minimized-box">
+            <Left
+              styleCategory="minimized"
+              category={props.category}
+              handleCloseWindow={handleCloseWindow}
+              window={props.window}
+              handleMinimize={handleMinimize}
+              handleExpand={handleExpand}
+            />
+          </span>
+        )}
       </Snackbar>
     </>
   );
