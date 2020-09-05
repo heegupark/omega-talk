@@ -7,14 +7,16 @@ export default function Main() {
   const [lastPosition, setLastPosition] = useState({ x: 200, y: 50 });
   const [username, setUsername] = useState('');
 
-  const openWindow = (_id: any, roomname: any) => {
+  const openWindow = (_id: any, room: any) => {
     const isOpened = windows.findIndex((item: any) => item._id === _id);
     const newWindow = {
       _id,
-      roomname,
+      roomname: room.roomname,
       positionX: lastPosition.x + 20,
       positionY: lastPosition.y + 20,
       zIndex: maxZIndex + 1,
+      owner: room.owner,
+      participants: room.participants.length,
     };
     if (isOpened === -1) {
       setMaxZIndex(maxZIndex + 1);
@@ -43,6 +45,7 @@ export default function Main() {
           <Window
             category="main"
             maxZIndex={maxZIndex}
+            username={username}
             lastPosition={lastPosition}
             setMaxZIndex={setMaxZIndex}
             openWindow={openWindow}
@@ -52,6 +55,7 @@ export default function Main() {
               <Window
                 key={window._id}
                 window={window}
+                username={username}
                 zIndex={window.zIndex}
                 maxZIndex={maxZIndex}
                 category="chat-room"

@@ -30,12 +30,15 @@ export default function ChatMain(props: any) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ roomname: roomname }),
+      body: JSON.stringify({ roomname: roomname, username: props.username }),
     })
       .then((res) => res.json())
       .then((data) => {
         const newRooms = [data.room, ...rooms] as any;
-        if (data.success) setRooms(newRooms);
+        if (data.success) {
+          setRooms(newRooms);
+          props.openWindow(data.room._id, data.room);
+        }
       })
       .catch((err) => {
         console.error(`Something wrong happened while creating:${err.message}`);

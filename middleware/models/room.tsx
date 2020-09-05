@@ -8,9 +8,46 @@ const roomSchema: Schema = new mongoose.Schema(
   {
     roomname: {
       type: String,
-      required: false,
+      required: true,
       trim: true,
     },
+    owner: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    participants: [
+      {
+        username: {
+          type: String,
+          required: true,
+        },
+        created: {
+          type: Date,
+          default: Date.now,
+        },
+        updated: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    messages: [
+      {
+        username: {
+          type: String,
+          required: true,
+        },
+        message: {
+          type: String,
+          required: true,
+        },
+        created: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

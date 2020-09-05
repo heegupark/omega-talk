@@ -128,7 +128,7 @@ export default function Window(props: any) {
             handleMinimize={handleMinimize}
             handleExpand={handleExpand}
           />
-          <ChatMain openWindow={props.openWindow} />
+          <ChatMain openWindow={props.openWindow} username={props.username} />
         </div>
       );
       break;
@@ -141,7 +141,7 @@ export default function Window(props: any) {
             handleMinimize={handleMinimize}
             handleExpand={handleExpand}
           />
-          <Room />
+          <Room username={props.username} window={props.window} />
         </div>
       );
       break;

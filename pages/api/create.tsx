@@ -3,9 +3,13 @@ import Room from '../../middleware/models/room';
 require('../../middleware/db/mongoose');
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-  const { roomname } = request.body;
+  const { roomname, username } = request.body;
   try {
-    const newRoom = new Room({ roomname });
+    const newRoom = new Room({
+      roomname,
+      owner: username,
+      participants: { username },
+    });
     await newRoom.save();
     return response.status(201).json({ success: true, room: newRoom });
   } catch (e) {

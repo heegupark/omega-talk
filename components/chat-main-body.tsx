@@ -35,8 +35,8 @@ export default function ChatMainBody(props: any) {
     return date;
   };
 
-  const openChatroom = (_id: any, roomname: any) => {
-    props.openWindow(_id, roomname);
+  const openChatroom = (_id: any, room: any) => {
+    props.openWindow(_id, room);
   };
 
   return (
@@ -47,12 +47,15 @@ export default function ChatMainBody(props: any) {
           <div
             key={room._id}
             className="chat-room-row cursor-pointer"
-            onClick={() => openChatroom(room._id, room.roomname)}
+            onClick={() => openChatroom(room._id, room)}
           >
             <div className="icon-box">
               <i className="far fa-user"></i>
             </div>
-            <div className="room-name">{room.roomname}</div>
+            <div className="room-name">
+              {room.roomname}
+              <span className="participants-count">{`(${room.participants.length})`}</span>
+            </div>
             <div className="room-date">{date}</div>
           </div>
         );

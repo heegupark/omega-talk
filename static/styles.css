@@ -153,8 +153,8 @@ body {
 
 .send-btn {
   float: right;
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   background-color: rgb(255, 229, 0);
   border: 1px solid rgb(242, 217, 0);
   border-radius: 3px;
@@ -202,6 +202,13 @@ body {
   border-radius: 0px 0px 5px 5px;
   background-color: rgb(189, 209, 220);
   /* box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1); */
+}
+
+.participants-count {
+  font-size: 12px;
+  color: gray;
+  font-weight: 300;
+  padding-left: 5px;
 }
 
 .chat-head {
@@ -306,14 +313,16 @@ body {
 .room-name {
   padding-left: 5px;
   padding-top: 10px;
-  width: 60%;
+  width: 65%;
   font-size: 14px;
   font-weight: 600;
 }
 
 .room-date {
+  text-align: right;
   color: rgb(173, 173, 173);
   font-size: 13px;
+  padding-top: 7px;
 }
 
 .omega-footer {
@@ -398,6 +407,67 @@ body {
 
 .username-cancel-btn:hover {
   background-color: grey;
+}
+
+.message-row-me {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.message-content-me {
+  font-size: 14px;
+  background-color: rgb(255, 228, 0);
+  margin: 3px 10px 3px 5px;
+  padding: 3px 7px 3px 7px;
+  border-radius: 3px;
+  box-shadow: 1px 1px rgba(10, 10, 10, 0.1);
+}
+
+.message-date-me,
+.message-date-other {
+  font-size: 10px;
+  color: rgb(96, 106, 112);
+  padding-top: 12px;
+}
+
+.message-row-other {
+  display: flex;
+  flex-direction: row;
+}
+
+.chat-profile-other {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: 22px;
+  padding-top: 3px;
+  color: rgb(255, 228, 0);
+  background-color: rgb(66, 54, 48);
+  border-radius: 40%;
+  margin: 10px;
+}
+
+.message-username-other {
+  font-size: 12px;
+  color: rgb(79, 87, 92);
+}
+
+.message-content-other {
+  font-size: 14px;
+  background-color: white;
+  margin: 3px 5px 3px 5px;
+  padding: 3px 7px 3px 7px;
+  border-radius: 3px;
+  box-shadow: 1px 1px rgba(10, 10, 10, 0.1);
+}
+
+.message-other-first-row {
+  display: flex;
+  flex-direction: column;
+}
+.message-other-second-row {
+  display: flex;
+  flex-direction: row;
 }
 
 .cursor-pointer {
