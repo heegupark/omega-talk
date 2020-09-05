@@ -4,6 +4,8 @@ import RoomChatInput from '../components/room-chat-input';
 
 export default function Room(props: any) {
   const [messages, setMessages] = useState([]);
+  const roommainRef = React.useRef<HTMLDivElement>(null);
+
   const sendMessage = (message: string) => {
     fetch('/api/message', {
       method: 'POST',
@@ -57,10 +59,13 @@ export default function Room(props: any) {
   useEffect(() => {
     getMessages();
   }, []);
-
   return (
-    <div className="room-main">
-      <RoomChatMain username={props.username} messages={messages} />
+    <div className="room-main" ref={roommainRef}>
+      <RoomChatMain
+        roommainHeight={roommainRef.current?.clientHeight}
+        username={props.username}
+        messages={messages}
+      />
       <RoomChatInput sendMessage={sendMessage} />
     </div>
   );

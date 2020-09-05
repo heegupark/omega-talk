@@ -124,6 +124,7 @@ export default function Window(props: any) {
       element = (
         <div className="main-box">
           <Left
+            signout={props.signout}
             handleCloseWindow={handleCloseWindow}
             handleMinimize={handleMinimize}
             handleExpand={handleExpand}

@@ -9,6 +9,7 @@ export default function EnterUsername(props: any) {
     if (username.length < 1) {
       setLabel('Please enter username');
     } else {
+      localStorage.setItem('omega-talk-username', username);
       props.setUsername(username);
     }
   };

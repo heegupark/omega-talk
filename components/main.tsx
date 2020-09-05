@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Window from '../components/window';
 
 export default function Main() {
   const [maxZIndex, setMaxZIndex] = useState(0);
   const [windows, setWindows] = useState([] as any);
   const [lastPosition, setLastPosition] = useState({ x: 200, y: 50 });
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('' as any);
 
+  useEffect(() => {
+    if (localStorage.getItem('omega-talk-username')) {
+      setUsername(localStorage.getItem('omega-talk-username'));
+    }
+  }, []);
   const openWindow = (_id: any, room: any) => {
     const isOpened = windows.findIndex((item: any) => item._id === _id);
     const newWindow = {
@@ -38,6 +43,11 @@ export default function Main() {
     setWindows(newWindows as any);
   };
 
+  const signout = () => {
+    localStorage.removeItem('omega-talk-username');
+    setUsername('');
+  };
+
   return (
     <>
       {username ? (
@@ -49,6 +59,7 @@ export default function Main() {
             lastPosition={lastPosition}
             setMaxZIndex={setMaxZIndex}
             openWindow={openWindow}
+            signout={signout}
           />
           {windows.map((window: any) => {
             return (

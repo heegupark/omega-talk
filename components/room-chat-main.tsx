@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function RoomChatMain(props: any) {
+  const roomchatRef = React.useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const convertDate = (dateAt: any) => {
     const date = new Date(dateAt).toLocaleTimeString(navigator.language, {
       hour: '2-digit',
@@ -9,10 +11,18 @@ export default function RoomChatMain(props: any) {
     return date;
   };
 
+  useEffect(() => {
+    if (roomchatRef.current) {
+      console.log(roomchatRef.current);
+      roomchatRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [props.messages]);
   return (
-    <div className="room-chat-main-box">
+    <div
+      className="room-chat-main-box"
+      style={{ height: `${props.roommainHeight - 105}px` }}
+    >
       {props.messages.map((message: any) => {
-        console.log(message);
         const isMe = message.username === props.username;
         return (
           <div key={message._id}>
@@ -47,6 +57,7 @@ export default function RoomChatMain(props: any) {
           </div>
         );
       })}
+      <div ref={roomchatRef}></div>
     </div>
   );
 }

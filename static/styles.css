@@ -64,6 +64,14 @@ body {
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
 
+.signout {
+  position: fixed;
+  bottom: 10px;
+  color: lightgray;
+  font-size: 24px;
+  left: 30px;
+}
+
 .minimized {
   max-width: 80px;
   min-width: 80px;
@@ -125,7 +133,7 @@ body {
 
 .room-chat-main-box {
   /* background-color: rgb(189, 209, 220); */
-  height: 100%;
+  overflow-y: scroll;
 }
 
 .room-chat-input-box {
@@ -140,7 +148,7 @@ body {
 }
 
 .room-chat-input {
-  width: 89%;
+  width: 88%;
   height: 100%;
   border: none;
   resize: none;
@@ -413,26 +421,32 @@ body {
   display: flex;
   flex-direction: row-reverse;
 }
-
-.message-content-me {
+.message-row-other {
+  display: flex;
+  flex-direction: row;
+}
+.message-content-me,
+.message-content-other {
   font-size: 14px;
-  background-color: rgb(255, 228, 0);
-  margin: 3px 10px 3px 5px;
   padding: 3px 7px 3px 7px;
   border-radius: 3px;
   box-shadow: 1px 1px rgba(10, 10, 10, 0.1);
+  max-width: 70%;
+  word-wrap: break-word;
 }
-
+.message-content-me {
+  background-color: rgb(255, 228, 0);
+  margin: 3px 10px 3px 5px;
+}
+.message-content-other {
+  background-color: white;
+  margin: 3px 5px 3px 5px;
+}
 .message-date-me,
 .message-date-other {
   font-size: 10px;
   color: rgb(96, 106, 112);
   padding-top: 12px;
-}
-
-.message-row-other {
-  display: flex;
-  flex-direction: row;
 }
 
 .chat-profile-other {
@@ -452,18 +466,10 @@ body {
   color: rgb(79, 87, 92);
 }
 
-.message-content-other {
-  font-size: 14px;
-  background-color: white;
-  margin: 3px 5px 3px 5px;
-  padding: 3px 7px 3px 7px;
-  border-radius: 3px;
-  box-shadow: 1px 1px rgba(10, 10, 10, 0.1);
-}
-
 .message-other-first-row {
   display: flex;
   flex-direction: column;
+  width: 70%;
 }
 .message-other-second-row {
   display: flex;

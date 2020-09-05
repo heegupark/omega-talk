@@ -11,6 +11,9 @@ export default function Left(props: any) {
         handleExpand={props.handleExpand}
         handleMinimize={props.handleMinimize}
       />
+      <div className="signout cursor-pointer" onClick={() => props.signout()}>
+        <i className="fas fa-sign-out-alt"></i>
+      </div>
     </div>
   );
 }

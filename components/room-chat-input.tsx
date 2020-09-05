@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function RoomChatInput(props: any) {
   const [message, setMessage] = useState('');
   const handleSendBtnClick = () => {
-    if (message.length > 1) {
+    if (message.length > 0) {
       props.sendMessage(message);
       setMessage('');
     }
