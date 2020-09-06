@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CircleMenu from '../components/circle-menu';
 import Tooltip from '@material-ui/core/Tooltip';
 

@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { Rnd } from 'react-rnd';
 import Left from '../components/left';
 import ChatMain from '../components/chat-main';
-import Button from '@material-ui/core/Button';
 import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
 
 export interface State extends SnackbarOrigin {

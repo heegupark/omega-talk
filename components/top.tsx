@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CircleMenu from '../components/circle-menu';
 
 export default function Top(props: any) {

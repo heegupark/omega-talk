@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RoomChatMain from '../components/room-chat-main';
 import RoomChatInput from '../components/room-chat-input';
 import socketIOClient from 'socket.io-client';
-const socket = socketIOClient(':8081/');
+const socket = socketIOClient(`:${process.env.socketPort}/`);
 
 export default function Room(props: any) {
   const [messages, setMessages] = useState([]);

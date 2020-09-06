@@ -34,6 +34,7 @@
     "mongoose": "^5.10.2",
     "next": "^9.5.2",
     "react": "^16.13.1",
+    "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
     "react-rnd": "^10.2.2",
     "react-spring": "^9.0.0-rc.3",

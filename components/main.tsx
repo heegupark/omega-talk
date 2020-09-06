@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Window from '../components/window';
 import socketIOClient from 'socket.io-client';
-const socket = socketIOClient(':8081/');
+const socket = socketIOClient(`:${process.env.socketPort}/`);
 
-export default function Main() {
+export default function Main(props: any) {
   const [maxZIndex, setMaxZIndex] = useState(0);
   const [windows, setWindows] = useState([] as any);
   const [lastPosition, setLastPosition] = useState({ x: 200, y: 50 });
