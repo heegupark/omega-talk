@@ -6,6 +6,7 @@ import ChatMain from '../components/chat-main';
 import Room from '../components/room';
 import EnterUsername from '../components/enter-username';
 import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
+import Tooltip from '@material-ui/core/Tooltip';
 
 export interface State extends SnackbarOrigin {
   open: boolean;
@@ -102,6 +103,7 @@ export default function Window(props: any) {
   };
 
   const openMainWindow = () => {
+    setIsMinimized(false);
     setIsCloseMainWindow(false);
     setState({ ...state, open: false });
   };
@@ -124,6 +126,7 @@ export default function Window(props: any) {
       element = (
         <div className="main-box">
           <Left
+            username={props.username}
             signout={props.signout}
             handleCloseWindow={handleCloseWindow}
             handleMinimize={handleMinimize}
@@ -170,10 +173,11 @@ export default function Window(props: any) {
           minHeight={640}
           onDragStop={(e, d) => {
             setPosition({ x: d.x, y: d.y });
+            props.setLastPosition({ x: d.x, y: d.y });
           }}
           onDragStart={() => {
             setZIndex(props.maxZIndex + 1);
-            props.setMaxZIndex(props.maxZIndex + 1);
+            props.setMaxZIndex(() => props.maxZIndex + 1);
           }}
           onResizeStop={(e, direction, ref, delta, position) => {
             setSize({
@@ -189,30 +193,34 @@ export default function Window(props: any) {
       )}
       <Snackbar
         id="minimized"
-        style={{ marginLeft }}
+        style={vertical === 'top' ? { marginLeft: 0 } : { marginLeft }}
         anchorOrigin={{ vertical, horizontal }}
         open={open}
         key={vertical + horizontal}
       >
-        {isCloseMainWindow ? (
-          <span
-            onClick={() => openMainWindow()}
-            className="closed-box bg-brown cursor-pointer"
-          >
-            +
-          </span>
-        ) : (
-          <span className="minimized-box">
-            <Left
-              styleCategory="minimized"
-              category={props.category}
-              handleCloseWindow={handleCloseWindow}
-              window={props.window}
-              handleMinimize={handleMinimize}
-              handleExpand={handleExpand}
-            />
-          </span>
-        )}
+        <>
+          {isCloseMainWindow ? (
+            <Tooltip title="open main window" arrow>
+              <span
+                onClick={() => openMainWindow()}
+                className="closed-box bg-brown cursor-pointer"
+              >
+                <i className="far fa-comment"></i>
+              </span>
+            </Tooltip>
+          ) : (
+            <span className="minimized-box">
+              <Left
+                styleCategory="minimized"
+                category={props.category}
+                handleCloseWindow={handleCloseWindow}
+                window={props.window}
+                handleMinimize={handleMinimize}
+                handleExpand={handleExpand}
+              />
+            </span>
+          )}
+        </>
       </Snackbar>
     </>
   );

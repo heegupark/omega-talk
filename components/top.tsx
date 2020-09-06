@@ -19,9 +19,9 @@ export default function Top(props: any) {
           <div className="chatroom-title">{props.window.roomname}</div>
           <div className="chatroom-humber">
             <i className="fas fa-user-alt"></i>
-            <span className="participants-count">{`(${
+            <span className="participants-count">{`${
               props.window && props.window.participants
-            })`}</span>
+            }`}</span>
           </div>
         </div>
       </div>

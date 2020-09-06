@@ -54,7 +54,7 @@ export default function ChatMainBody(props: any) {
             </div>
             <div className="room-name">
               {room.roomname}
-              <span className="participants-count">{`(${room.participants.length})`}</span>
+              {/* <span className="participants-count">{`(${room.participants.length})`}</span> */}
             </div>
             <div className="room-date">{date}</div>
           </div>

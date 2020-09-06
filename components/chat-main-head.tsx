@@ -2,6 +2,8 @@ import React from 'react';
 import Popover from '@material-ui/core/Popover';
 import CreateChatroom from './create-chatroom';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+
 const useStyles = makeStyles(() =>
   createStyles({
     paper: {
@@ -14,7 +16,6 @@ const useStyles = makeStyles(() =>
 
 export default function ChatMainHead(props: any) {
   const classes = useStyles();
-
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -33,9 +34,11 @@ export default function ChatMainHead(props: any) {
   return (
     <div className="chat-head">
       <span className="chat-head-title">Chats</span>
-      <span className="chat-head-bubble cursor-pointer" onClick={handleClick}>
-        <i className="fas fa-comment-medical"></i>
-      </span>
+      <Tooltip title="create a chat room" arrow>
+        <span className="chat-head-bubble cursor-pointer" onClick={handleClick}>
+          <i className="fas fa-comment-medical"></i>
+        </span>
+      </Tooltip>
       <Popover
         elevation={1}
         className={classes.paper}

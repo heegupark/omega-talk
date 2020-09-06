@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ChatMainHead from './chat-main-head';
 import ChatMainBody from './chat-main-body';
+import socketIOClient from 'socket.io-client';
+const socket = socketIOClient(':8081/');
 
 export default function ChatMain(props: any) {
   const [rooms, setRooms] = useState([]);
@@ -24,25 +26,22 @@ export default function ChatMain(props: any) {
 
   useEffect(getRooms, []);
 
-  const create = (roomname: String) => {
-    fetch('/api/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ roomname: roomname, username: props.username }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const newRooms = [data.room, ...rooms] as any;
-        if (data.success) {
-          setRooms(newRooms);
-          props.openWindow(data.room._id, data.room);
+  useEffect(() => {
+    socket.on('main', (data: any) => {
+      if (data.success) {
+        setRooms((rooms: any) => [data.data, ...rooms] as any);
+        if (props.username === data.data.owner) {
+          props.openWindow(data.data._id, data.data);
         }
-      })
-      .catch((err) => {
-        console.error(`Something wrong happened while creating:${err.message}`);
-      });
+      }
+    });
+  }, []);
+
+  const create = (roomname: String) => {
+    const roomData = { roomname: roomname, username: props.username };
+    if (socket) {
+      socket.emit('create-room', roomData);
+    }
   };
 
   const createChatroom = (roomname: String) => {

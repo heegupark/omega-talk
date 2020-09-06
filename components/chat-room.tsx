@@ -93,7 +93,6 @@ export default function ChatRoom() {
             setPosition({ x: d.x, y: d.y });
           }}
           onResizeStop={(e, direction, ref, delta, position) => {
-            console.log(ref.style.width);
             setSize({
               width: Number(ref.style.width.split('px')[0]),
               height: Number(ref.style.height.split('px')[0]),

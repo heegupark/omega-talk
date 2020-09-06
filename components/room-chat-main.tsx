@@ -1,9 +1,33 @@
 import React, { useState, useEffect } from 'react';
 
 export default function RoomChatMain(props: any) {
+  let yesterday: any = null;
   const roomchatRef = React.useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const convertDate = (dateAt: any) => {
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  const convertToDay = (dateAt: any) => {
+    const today = new Date();
+    const year = new Date(dateAt).getFullYear();
+    const month = new Date(dateAt).getMonth();
+    const monthName = monthNames[new Date(dateAt).getMonth()];
+    const day = new Date(dateAt).getDay();
+    let date = `${monthName} ${day}, ${year}`;
+    return date;
+  };
+
+  const convertToHour = (dateAt: any) => {
     const date = new Date(dateAt).toLocaleTimeString(navigator.language, {
       hour: '2-digit',
       minute: '2-digit',
@@ -13,25 +37,37 @@ export default function RoomChatMain(props: any) {
 
   useEffect(() => {
     if (roomchatRef.current) {
-      console.log(roomchatRef.current);
-      roomchatRef.current.scrollIntoView({ behavior: 'smooth' });
+      roomchatRef.current.scrollIntoView({ block: 'end', behavior: 'auto' });
     }
   }, [props.messages]);
   return (
     <div
       className="room-chat-main-box"
-      style={{ height: `${props.roommainHeight - 105}px` }}
+      style={{
+        height: `${props.roommainHeight - 100}px`,
+      }}
     >
       {props.messages.map((message: any) => {
         const isMe = message.username === props.username;
+        const isJoined = message.message === props.roomId;
+        const day = new Date(message.created).getDay();
+        const isDayChanged = day !== yesterday;
+        yesterday = day;
         return (
           <div key={message._id}>
-            {isMe ? (
+            {isDayChanged && (
+              <div className="date-change">{`${convertToDay(
+                message.created
+              )}`}</div>
+            )}
+            {isJoined ? (
+              <div className="user-join-room">{`${message.username} joined`}</div>
+            ) : isMe ? (
               <div className="message-row-me">
                 {/* <div>{message.username}</div> */}
                 <div className="message-content-me">{message.message}</div>
                 <div className="message-date-me">
-                  {convertDate(message.created)}
+                  {convertToHour(message.created)}
                 </div>
               </div>
             ) : (
@@ -48,7 +84,7 @@ export default function RoomChatMain(props: any) {
                       {message.message}
                     </div>
                     <div className="message-date-other">
-                      {convertDate(message.created)}
+                      {convertToHour(message.created)}
                     </div>
                   </div>
                 </div>

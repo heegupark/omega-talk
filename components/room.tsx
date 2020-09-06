@@ -1,36 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import RoomChatMain from '../components/room-chat-main';
 import RoomChatInput from '../components/room-chat-input';
+import socketIOClient from 'socket.io-client';
+const socket = socketIOClient(':8081/');
 
 export default function Room(props: any) {
   const [messages, setMessages] = useState([]);
   const roommainRef = React.useRef<HTMLDivElement>(null);
 
   const sendMessage = (message: string) => {
-    fetch('/api/message', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    if (socket) {
+      socket.emit('chat', {
         _id: props.window._id,
         roomname: props.window.roomname,
         username: props.username,
         message,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data: any) => {
-        if (data.success) {
-          console.log(data);
-          setMessages([...messages, data.data] as any);
-        }
-      })
-      .catch((err) => {
-        console.error(
-          `Something wrong happened while sending a message:${err.message}`
-        );
       });
+    }
   };
   const getMessages = () => {
     fetch(`/api/getmessage`, {
@@ -45,7 +31,6 @@ export default function Room(props: any) {
       .then((res) => res.json())
       .then((data: any) => {
         if (data.success) {
-          console.log(data);
           setMessages(data.data);
         }
       })
@@ -59,11 +44,23 @@ export default function Room(props: any) {
   useEffect(() => {
     getMessages();
   }, []);
+
+  useEffect(() => {
+    const room = props.window._id;
+    socket.on(`room-${room}`, (data: any) => {
+      if (data.data) {
+        setMessages((messages: any) => [...messages, data.data] as any);
+      }
+    });
+    return () => {};
+  }, [props.window._id]);
+
   return (
     <div className="room-main" ref={roommainRef}>
       <RoomChatMain
         roommainHeight={roommainRef.current?.clientHeight}
         username={props.username}
+        roomId={props.window._id}
         messages={messages}
       />
       <RoomChatInput sendMessage={sendMessage} />
