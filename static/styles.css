@@ -36,7 +36,8 @@ body {
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
 
-.username-box {
+.username-box,
+.username-box-mobile {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -44,6 +45,10 @@ body {
   animation: fade-in 0.2s ease-in;
   background-color: rgb(66, 54, 48);
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.username-box-mobile {
+  border-radius: 0px;
 }
 
 @keyframes fade-in {
@@ -55,13 +60,17 @@ body {
   }
 }
 
-.left {
+.left,
+.left-mobile {
   max-width: 80px;
   min-width: 80px;
   height: 100%;
   border-radius: 5px 0px 0px 5px;
-  /* background-color: rgb(66, 54, 48); */
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.left-mobile {
+  border-radius: 0px;
 }
 
 .profile {
@@ -112,6 +121,12 @@ body {
 .top-body {
   display: flex;
   flex-direction: row;
+}
+
+.back-btn {
+  font-size: 28px;
+  margin: 20px 20px 10px 20px;
+  color: gray;
 }
 
 .top-profile-box {
@@ -202,13 +217,18 @@ body {
   text-align: center;
 }
 
-.main-chat {
+.main-chat,
+.main-chat-mobile {
   cursor: default;
   width: 100%;
   height: 100%;
   background-color: white;
   border-radius: 0px 5px 5px 0px;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.main-chat-mobile {
+  border-radius: 0px;
 }
 
 .room-main {
@@ -338,7 +358,7 @@ body {
 .room-date {
   text-align: right;
   color: rgb(173, 173, 173);
-  font-size: 13px;
+  font-size: 12px;
   padding-top: 7px;
 }
 

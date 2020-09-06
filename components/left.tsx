@@ -3,11 +3,17 @@ import CircleMenu from '../components/circle-menu';
 import Tooltip from '@material-ui/core/Tooltip';
 
 export default function Left(props: any) {
-  let style = props.styleCategory === 'minimized' ? 'minimized' : 'left';
+  let style =
+    props.styleCategory === 'minimized'
+      ? 'minimized'
+      : props.isMobile
+      ? 'left-mobile'
+      : 'left';
   style += props.category === 'chat-room' ? ' bg-white' : ' bg-brown';
   return (
     <div className={style}>
       <CircleMenu
+        isMobile={props.isMobile}
         handleCloseWindow={props.handleCloseWindow}
         handleExpand={props.handleExpand}
         handleMinimize={props.handleMinimize}

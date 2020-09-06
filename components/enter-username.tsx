@@ -11,6 +11,7 @@ export default function EnterUsername(props: any) {
     } else {
       localStorage.setItem('omega-talk-username', username);
       props.setUsername(username);
+      props.setView('main');
     }
   };
 
@@ -18,11 +19,11 @@ export default function EnterUsername(props: any) {
     setUsername('');
     setLabel('Please enter username');
   };
-
   return (
     <div className="enter-username-box">
       <div className="top">
         <CircleMenu
+          isMobile={props.isMobile}
           handleCloseWindow={props.handleCloseWindow}
           handleExpand={props.handleExpand}
           handleMinimize={props.handleMinimize}

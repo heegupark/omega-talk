@@ -8,13 +8,16 @@ export default function Main(props: any) {
   const [windows, setWindows] = useState([] as any);
   const [lastPosition, setLastPosition] = useState({ x: 200, y: 50 });
   const [username, setUsername] = useState('' as any);
+  const [view, setView] = useState('username');
 
   useEffect(() => {
     if (localStorage.getItem('omega-talk-username')) {
       setUsername(localStorage.getItem('omega-talk-username'));
+      setView('main');
     }
   }, []);
   const openWindow = (_id: string, room: any) => {
+    setView('chat-room');
     const isOpened = windows.findIndex((window: any) => window._id === _id);
     const newWindow = {
       _id,
@@ -48,10 +51,12 @@ export default function Main(props: any) {
   const closeWindow = (_id: any) => {
     const newWindows = windows.filter((item: any) => item._id !== _id);
     setWindows(newWindows as any);
+    // setView('main');
   };
 
   const signout = () => {
     localStorage.removeItem('omega-talk-username');
+    setView('username');
     setUsername('');
   };
 
@@ -59,16 +64,19 @@ export default function Main(props: any) {
     <>
       {username ? (
         <>
-          <Window
-            category="main"
-            maxZIndex={maxZIndex}
-            username={username}
-            lastPosition={lastPosition}
-            setLastPosition={setLastPosition}
-            setMaxZIndex={setMaxZIndex}
-            openWindow={openWindow}
-            signout={signout}
-          />
+          {!props.isMobile && view !== 'chat-room' && (
+            <Window
+              view={view}
+              category="main"
+              maxZIndex={maxZIndex}
+              username={username}
+              lastPosition={lastPosition}
+              setLastPosition={setLastPosition}
+              setMaxZIndex={setMaxZIndex}
+              openWindow={openWindow}
+              signout={signout}
+            />
+          )}
           {windows.map((window: any) => {
             return (
               <Window
@@ -76,6 +84,7 @@ export default function Main(props: any) {
                 window={window}
                 username={username}
                 zIndex={window.zIndex}
+                setView={setView}
                 setLastPosition={setLastPosition}
                 maxZIndex={maxZIndex}
                 category="chat-room"
@@ -88,6 +97,8 @@ export default function Main(props: any) {
       ) : (
         <Window
           setUsername={setUsername}
+          view={view}
+          setView={setView}
           category="username"
           maxZIndex={maxZIndex}
           setLastPosition={setLastPosition}

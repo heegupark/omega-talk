@@ -35,6 +35,7 @@ export default function ChatMain(props: any) {
         }
       }
     });
+    return () => {};
   }, []);
 
   const create = (roomname: String) => {
@@ -49,7 +50,7 @@ export default function ChatMain(props: any) {
   };
 
   return (
-    <div className="main-chat">
+    <div className={props.isMobile ? 'main-chat-mobile' : 'main-chat'}>
       <ChatMainHead createChatroom={createChatroom} />
       <ChatMainBody rooms={rooms} openWindow={props.openWindow} />
     </div>

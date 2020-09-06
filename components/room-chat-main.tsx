@@ -18,9 +18,7 @@ export default function RoomChatMain(props: any) {
     'Dec',
   ];
   const convertToDay = (dateAt: any) => {
-    const today = new Date();
     const year = new Date(dateAt).getFullYear();
-    const month = new Date(dateAt).getMonth();
     const monthName = monthNames[new Date(dateAt).getMonth()];
     const day = new Date(dateAt).getDay();
     let date = `${monthName} ${day}, ${year}`;

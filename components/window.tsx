@@ -31,6 +31,7 @@ export default function Window(props: any) {
   const [zIndex, setZIndex] = useState(0);
   const [marginLeft, setMarginLeft] = useState(0);
   const [isCloseMainWindow, setIsCloseMainWindow] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   let [isExpanded, setIsExpanded] = useState(false);
   let [isMinimized, setIsMinimized] = useState(false);
   let [isDraggable, setIsDraggable] = useState(true);
@@ -38,6 +39,12 @@ export default function Window(props: any) {
   useEffect(() => {
     setZIndex(props.zIndex);
   }, [props.zIndex]);
+
+  useEffect(() => {
+    if (document.body.clientWidth <= 600) {
+      setIsMobile(true);
+    }
+  }, []);
 
   const [state, setState] = React.useState<State>({
     open: false,
@@ -112,12 +119,14 @@ export default function Window(props: any) {
   switch (props.category) {
     case 'username':
       element = (
-        <div className="username-box">
+        <div className={isMobile ? 'username-box-mobile' : 'username-box'}>
           <EnterUsername
+            isMobile={isMobile}
             handleExpand={handleExpand}
             handleMinimize={handleMinimize}
             handleCloseWindow={handleCloseWindow}
             setUsername={props.setUsername}
+            setView={props.setView}
           />
         </div>
       );
@@ -126,13 +135,18 @@ export default function Window(props: any) {
       element = (
         <div className="main-box">
           <Left
+            isMobile={isMobile}
             username={props.username}
             signout={props.signout}
             handleCloseWindow={handleCloseWindow}
             handleMinimize={handleMinimize}
             handleExpand={handleExpand}
           />
-          <ChatMain openWindow={props.openWindow} username={props.username} />
+          <ChatMain
+            isMobile={isMobile}
+            openWindow={props.openWindow}
+            username={props.username}
+          />
         </div>
       );
       break;
@@ -140,56 +154,67 @@ export default function Window(props: any) {
       element = (
         <div className="room-box">
           <Top
+            isMobile={isMobile}
+            setView={props.setView}
             handleCloseWindow={handleCloseWindow}
             window={props.window}
+            closeWindow={props.closeWindow}
             handleMinimize={handleMinimize}
             handleExpand={handleExpand}
           />
-          <Room username={props.username} window={props.window} />
+          <Room
+            isMobile={isMobile}
+            username={props.username}
+            window={props.window}
+          />
         </div>
       );
       break;
   }
-
   return (
     <>
-      {!isMinimized && !isCloseMainWindow && (
-        <Rnd
-          default={{
-            x: position.x,
-            y: position.y,
-            width: size.width,
-            height: size.height,
-          }}
-          position={{
-            x: position.x,
-            y: position.y,
-          }}
-          size={{
-            width: size.width,
-            height: size.height,
-          }}
-          minWidth={320}
-          minHeight={640}
-          onDragStop={(e, d) => {
-            setPosition({ x: d.x, y: d.y });
-            props.setLastPosition({ x: d.x, y: d.y });
-          }}
-          onDragStart={() => {
-            setZIndex(props.maxZIndex + 1);
-            props.setMaxZIndex(() => props.maxZIndex + 1);
-          }}
-          onResizeStop={(e, direction, ref, delta, position) => {
-            setSize({
-              width: Number(ref.style.width.split('px')[0]),
-              height: Number(ref.style.height.split('px')[0]),
-            });
-          }}
-          disableDragging={!isDraggable}
-          style={{ zIndex }}
-        >
-          {element}
-        </Rnd>
+      {isMobile ? (
+        <div style={{ height: '100vh' }}>{element}</div>
+      ) : (
+        !isMinimized &&
+        !isCloseMainWindow && (
+          <Rnd
+            default={{
+              x: position.x,
+              y: position.y,
+              width: size.width,
+              height: size.height,
+            }}
+            position={{
+              x: position.x,
+              y: position.y,
+            }}
+            size={{
+              width: size.width,
+              height: size.height,
+            }}
+            minWidth={320}
+            minHeight={640}
+            onDragStop={(e, d) => {
+              setPosition({ x: d.x, y: d.y });
+              props.setLastPosition({ x: d.x, y: d.y });
+            }}
+            onDragStart={() => {
+              setZIndex(props.maxZIndex + 1);
+              props.setMaxZIndex(() => props.maxZIndex + 1);
+            }}
+            onResizeStop={(e, direction, ref, delta, position) => {
+              setSize({
+                width: Number(ref.style.width.split('px')[0]),
+                height: Number(ref.style.height.split('px')[0]),
+              });
+            }}
+            disableDragging={isMobile || !isDraggable}
+            style={{ zIndex }}
+          >
+            {element}
+          </Rnd>
+        )
       )}
       <Snackbar
         id="minimized"
