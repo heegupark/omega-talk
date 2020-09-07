@@ -47,6 +47,15 @@ export default function ChatMainBody(props: any) {
     <div className="chat-main-body">
       {props.rooms.map((room: any) => {
         const date = convertDate(room.updatedAt);
+        const readMessage =
+          room.messages &&
+          room.messages.map((message: any) => {
+            message.read &&
+              message.read.findIndex(
+                (read: any) => read.username === props.username
+              );
+          });
+        const hasNew = readMessage >= 0;
         return (
           <div
             key={room._id}
@@ -56,7 +65,10 @@ export default function ChatMainBody(props: any) {
             <div className="icon-box">
               <i className="far fa-user"></i>
             </div>
-            <div className="room-name">{covertRoomname(room.roomname)}</div>
+            <div className="room-name">
+              {covertRoomname(room.roomname)}
+              <span>{hasNew ? 'new' : ''}</span>
+            </div>
             <div className="room-date">{date}</div>
           </div>
         );

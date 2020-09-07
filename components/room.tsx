@@ -14,7 +14,6 @@ export default function Room(props: any) {
         _id: props.window._id,
         roomname: props.window.roomname,
         username: props.username,
-        message,
       });
     }
   };

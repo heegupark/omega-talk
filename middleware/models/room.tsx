@@ -42,6 +42,18 @@ const roomSchema: Schema = new mongoose.Schema(
           type: String,
           required: true,
         },
+        read: [
+          {
+            username: {
+              type: String,
+              required: true,
+            },
+            created: {
+              type: Date,
+              default: Date.now,
+            },
+          },
+        ],
         created: {
           type: Date,
           default: Date.now,
@@ -54,18 +66,5 @@ const roomSchema: Schema = new mongoose.Schema(
   }
 );
 
-// if (!modelAlreadyDeclared()) {
-//   const Room = mongoose.model<IRoom>('Room', roomSchema);
-//   // export default Room;
-// }
-
-// function modelAlreadyDeclared() {
-//   try {
-//     mongoose.model('Room'); // it throws an error if the model is still not defined
-//     return true;
-//   } catch (e) {
-//     return false;
-//   }
-// }
 const Room = mongoose.models.Room || mongoose.model<IRoom>('Room', roomSchema);
 export default Room;

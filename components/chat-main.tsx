@@ -60,7 +60,11 @@ export default function ChatMain(props: any) {
   return (
     <div className={props.isMobile ? 'main-chat-mobile' : 'main-chat'}>
       <ChatMainHead createChatroom={createChatroom} />
-      <ChatMainBody rooms={rooms} openWindow={props.openWindow} />
+      <ChatMainBody
+        username={props.username}
+        rooms={rooms}
+        openWindow={props.openWindow}
+      />
     </div>
   );
 }

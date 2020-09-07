@@ -8,6 +8,7 @@ app.use(express.json());
 // for socket communication
 import socketIo from 'socket.io';
 import Room from '../middleware/models/room';
+import { read } from 'fs';
 require('../middleware/db/mongoose');
 const server = http.createServer(app);
 const io = socketIo(server);
@@ -53,7 +54,6 @@ nextApp.prepare().then(async () => {
             message: 'unable to send a message.',
           });
         }
-        await room.messages.push({ username, message });
         room.save();
         const result = room.messages[room.messages.length - 1];
         socket.emit(`room-${_id}`, {
