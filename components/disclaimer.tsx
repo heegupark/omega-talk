@@ -90,7 +90,7 @@ function Disclaimer(props: any) {
             </Button>
             <p className={classes.paragraph}>
               I built this app using React, React Hooks, Next.js, Socket.io and
-              Typescript to provide a function for chatting functions.
+              Typescript to provide chatting functions.
             </p>
             <div className={classes.support}>
               {'If you have any questions, please email to '}
