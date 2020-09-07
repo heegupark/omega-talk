@@ -7,7 +7,10 @@ export default function IndexPage() {
       <Head>
         <meta charSet="UTF-8" />
         <title>o-talk</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="title" content="Talk with friendss!" />
         <meta name="description" content="Talk with friends!" />
         <meta property="og:title" content="o-talk" />
