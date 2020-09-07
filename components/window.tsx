@@ -31,7 +31,6 @@ export default function Window(props: any) {
   const [zIndex, setZIndex] = useState(0);
   const [marginLeft, setMarginLeft] = useState(0);
   const [isCloseMainWindow, setIsCloseMainWindow] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   let [isExpanded, setIsExpanded] = useState(false);
   let [isMinimized, setIsMinimized] = useState(false);
   let [isDraggable, setIsDraggable] = useState(true);
@@ -39,12 +38,6 @@ export default function Window(props: any) {
   useEffect(() => {
     setZIndex(props.zIndex);
   }, [props.zIndex]);
-
-  useEffect(() => {
-    if (document.body.clientWidth <= 600) {
-      setIsMobile(true);
-    }
-  }, []);
 
   const [state, setState] = React.useState<State>({
     open: false,
@@ -119,9 +112,11 @@ export default function Window(props: any) {
   switch (props.category) {
     case 'username':
       element = (
-        <div className={isMobile ? 'username-box-mobile' : 'username-box'}>
+        <div
+          className={props.isMobile ? 'username-box-mobile' : 'username-box'}
+        >
           <EnterUsername
-            isMobile={isMobile}
+            isMobile={props.isMobile}
             handleExpand={handleExpand}
             handleMinimize={handleMinimize}
             handleCloseWindow={handleCloseWindow}
@@ -135,7 +130,7 @@ export default function Window(props: any) {
       element = (
         <div className="main-box">
           <Left
-            isMobile={isMobile}
+            isMobile={props.isMobile}
             username={props.username}
             signout={props.signout}
             handleCloseWindow={handleCloseWindow}
@@ -143,7 +138,8 @@ export default function Window(props: any) {
             handleExpand={handleExpand}
           />
           <ChatMain
-            isMobile={isMobile}
+            isMobile={props.isMobile}
+            setView={props.setView}
             openWindow={props.openWindow}
             username={props.username}
           />
@@ -154,7 +150,7 @@ export default function Window(props: any) {
       element = (
         <div className="room-box">
           <Top
-            isMobile={isMobile}
+            isMobile={props.isMobile}
             setView={props.setView}
             handleCloseWindow={handleCloseWindow}
             window={props.window}
@@ -163,7 +159,7 @@ export default function Window(props: any) {
             handleExpand={handleExpand}
           />
           <Room
-            isMobile={isMobile}
+            isMobile={props.isMobile}
             username={props.username}
             window={props.window}
           />
@@ -173,7 +169,7 @@ export default function Window(props: any) {
   }
   return (
     <>
-      {isMobile ? (
+      {props.isMobile ? (
         <div style={{ height: '100vh' }}>{element}</div>
       ) : (
         !isMinimized &&
@@ -209,7 +205,7 @@ export default function Window(props: any) {
                 height: Number(ref.style.height.split('px')[0]),
               });
             }}
-            disableDragging={isMobile || !isDraggable}
+            disableDragging={props.isMobile || !isDraggable}
             style={{ zIndex }}
           >
             {element}

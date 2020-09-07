@@ -125,7 +125,7 @@ body {
 
 .back-btn {
   font-size: 28px;
-  margin: 20px 20px 10px 20px;
+  margin: 0px 20px 10px 20px;
   color: gray;
 }
 
@@ -147,9 +147,22 @@ body {
   font-weight: 500;
 }
 
-.chatroom-humber {
+.chatroom-title-mobile {
+  width: 70%;
+  justify-self: center;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+}
+
+.chatroom-number {
   padding-left: 10px;
   padding-top: 10px;
+  font-size: 10px;
+  color: rgb(125, 125, 125);
+}
+
+.chatroom-number-mobile {
   font-size: 10px;
   color: rgb(125, 125, 125);
 }
@@ -159,7 +172,8 @@ body {
   overflow-y: scroll;
 }
 
-.room-chat-input-box {
+.room-chat-input-box,
+.room-chat-input-box-mobile {
   position: fixed;
   height: 100px;
   bottom: 0;
@@ -170,29 +184,47 @@ body {
   display: flex;
 }
 
-.room-chat-input {
+.room-chat-input-box-mobile {
+  height: 50px;
+  background-color: rgb(189, 209, 220);
+  border-radius: 0px;
+}
+
+.room-chat-input,
+.room-chat-input-mobile {
   width: 88%;
   height: 100%;
   border: none;
   resize: none;
   padding: 5px;
+  outline: none;
 }
 
-.room-chat-input {
-  outline: none;
+.room-chat-input-mobile {
+  border-radius: 15px;
+  padding: 10px;
 }
 
 .send-btn {
   float: right;
   width: 75px;
   height: 75px;
-  background-color: rgb(255, 229, 0);
+  /* background-color: rgb(255, 229, 0); */
   border: 1px solid rgb(242, 217, 0);
   border-radius: 3px;
 }
 
+.send-btn-mobile {
+  float: right;
+  width: 70px;
+  height: 30px;
+  /* background-color: rgb(255, 229, 0); */
+  border: 1px solid rgb(242, 217, 0);
+  border-radius: 15px;
+}
+
 .send-btn:hover {
-  background-color: rgb(242, 217, 0);
+  background-color: rgb(241, 231, 134);
 }
 
 .send-btn:focus {
@@ -246,6 +278,13 @@ body {
   color: gray;
   font-weight: 300;
   padding-left: 5px;
+}
+
+.participants-count-mobile {
+  font-size: 16px;
+  color: gray;
+  font-weight: 300;
+  padding-left: 10px;
 }
 
 .chat-head {
@@ -339,8 +378,8 @@ body {
   width: 35px;
   height: 35px;
   text-align: center;
-  font-size: 28px;
-  padding-top: 2px;
+  font-size: 22px;
+  padding-top: 5px;
   color: rgb(203, 214, 242);
   background-color: rgb(161, 182, 233);
   border-radius: 40%;
@@ -350,9 +389,11 @@ body {
 .room-name {
   padding-left: 5px;
   padding-top: 10px;
-  width: 65%;
+  width: 60%;
+  /* max-width: 170px; */
   font-size: 14px;
   font-weight: 600;
+  overflow-x: hidden;
 }
 
 .room-date {

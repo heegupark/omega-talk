@@ -39,6 +39,10 @@ export default function ChatMainBody(props: any) {
     props.openWindow(_id, room);
   };
 
+  const covertRoomname = (name: any) => {
+    return name.length > 12 ? name.substring(0, 11) + '...' : name;
+  };
+
   return (
     <div className="chat-main-body">
       {props.rooms.map((room: any) => {
@@ -52,10 +56,7 @@ export default function ChatMainBody(props: any) {
             <div className="icon-box">
               <i className="far fa-user"></i>
             </div>
-            <div className="room-name">
-              {room.roomname}
-              {/* <span className="participants-count">{`(${room.participants.length})`}</span> */}
-            </div>
+            <div className="room-name">{covertRoomname(room.roomname)}</div>
             <div className="room-date">{date}</div>
           </div>
         );

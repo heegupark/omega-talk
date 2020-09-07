@@ -8,17 +8,44 @@ export default function RoomChatInput(props: any) {
       setMessage('');
     }
   };
-
+  console.log();
   return (
-    <div className="room-chat-input-box">
-      <textarea
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        className="room-chat-input"
-      ></textarea>
-      <button onClick={handleSendBtnClick} className="send-btn cursor-pointer">
-        Send
-      </button>
-    </div>
+    <>
+      {props.isMobile ? (
+        <div className="room-chat-input-box-mobile">
+          <input
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="room-chat-input-mobile"
+          />
+          <button
+            onClick={handleSendBtnClick}
+            style={{
+              backgroundColor: message.length > 0 ? 'rgb(255, 229, 0)' : '',
+            }}
+            className="send-btn-mobile"
+          >
+            Send
+          </button>
+        </div>
+      ) : (
+        <div className="room-chat-input-box">
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="room-chat-input"
+          ></textarea>
+          <button
+            onClick={handleSendBtnClick}
+            style={{
+              backgroundColor: message.length > 0 ? 'rgb(255, 229, 0)' : '',
+            }}
+            className="send-btn cursor-pointer"
+          >
+            Send
+          </button>
+        </div>
+      )}
+    </>
   );
 }

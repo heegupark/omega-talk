@@ -19,26 +19,37 @@ export default function Top(props: any) {
       </div>
       <div className="top-body">
         {props.isMobile ? (
-          <div
-            className="back-btn cursor-pointer"
-            onClick={() => handleBackBtnClick()}
-          >
-            <i className="fas fa-arrow-left"></i>
-          </div>
+          <>
+            <div
+              className="back-btn cursor-pointer"
+              onClick={() => handleBackBtnClick()}
+            >
+              <i className="fas fa-chevron-left"></i>
+            </div>
+            <div className="chatroom-title-mobile">
+              {props.window.roomname}
+              <span className="participants-count-mobile">{`(${
+                props.window && props.window.participants
+              })`}</span>
+            </div>
+            <div className="chatroom-number-mobile"></div>
+          </>
         ) : (
-          <div className="top-profile-box">
-            <i className="far fa-user"></i>
-          </div>
+          <>
+            <div className="top-profile-box">
+              <i className="far fa-user"></i>
+            </div>
+            <div>
+              <div className="chatroom-title">{props.window.roomname}</div>
+              <div className="chatroom-number">
+                <i className="fas fa-user-alt"></i>
+                <span className="participants-count">{`${
+                  props.window && props.window.participants
+                }`}</span>
+              </div>
+            </div>
+          </>
         )}
-        <div>
-          <div className="chatroom-title">{props.window.roomname}</div>
-          <div className="chatroom-humber">
-            <i className="fas fa-user-alt"></i>
-            <span className="participants-count">{`${
-              props.window && props.window.participants
-            }`}</span>
-          </div>
-        </div>
       </div>
     </div>
   );

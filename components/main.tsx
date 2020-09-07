@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Window from '../components/window';
+import { isTablet } from 'react-device-detect';
 import socketIOClient from 'socket.io-client';
 const socket = socketIOClient(`:${process.env.socketPort}/`);
 
@@ -9,6 +10,13 @@ export default function Main(props: any) {
   const [lastPosition, setLastPosition] = useState({ x: 200, y: 50 });
   const [username, setUsername] = useState('' as any);
   const [view, setView] = useState('username');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (document.body.clientWidth <= 600 || isTablet) {
+      setIsMobile(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem('omega-talk-username')) {
@@ -16,8 +24,8 @@ export default function Main(props: any) {
       setView('main');
     }
   }, []);
+
   const openWindow = (_id: string, room: any) => {
-    setView('chat-room');
     const isOpened = windows.findIndex((window: any) => window._id === _id);
     const newWindow = {
       _id,
@@ -46,6 +54,7 @@ export default function Main(props: any) {
       });
       setWindows(() => newWindows);
     }
+    setView('chat-room');
   };
 
   const closeWindow = (_id: any) => {
@@ -62,21 +71,38 @@ export default function Main(props: any) {
 
   return (
     <>
-      {username ? (
+      {isMobile ? (
+        <Window
+          view={view}
+          setView={setView}
+          category={view}
+          isMobile={isMobile}
+          maxZIndex={maxZIndex}
+          username={username}
+          lastPosition={lastPosition}
+          setLastPosition={setLastPosition}
+          setMaxZIndex={setMaxZIndex}
+          openWindow={openWindow}
+          signout={signout}
+          setUsername={setUsername}
+          closeWindow={closeWindow}
+          window={windows[0]}
+        />
+      ) : username ? (
         <>
-          {!props.isMobile && view !== 'chat-room' && (
-            <Window
-              view={view}
-              category="main"
-              maxZIndex={maxZIndex}
-              username={username}
-              lastPosition={lastPosition}
-              setLastPosition={setLastPosition}
-              setMaxZIndex={setMaxZIndex}
-              openWindow={openWindow}
-              signout={signout}
-            />
-          )}
+          <Window
+            view={view}
+            setView={setView}
+            category="main"
+            isMobile={isMobile}
+            maxZIndex={maxZIndex}
+            username={username}
+            lastPosition={lastPosition}
+            setLastPosition={setLastPosition}
+            setMaxZIndex={setMaxZIndex}
+            openWindow={openWindow}
+            signout={signout}
+          />
           {windows.map((window: any) => {
             return (
               <Window
@@ -84,6 +110,8 @@ export default function Main(props: any) {
                 window={window}
                 username={username}
                 zIndex={window.zIndex}
+                view={view}
+                isMobile={isMobile}
                 setView={setView}
                 setLastPosition={setLastPosition}
                 maxZIndex={maxZIndex}
@@ -100,6 +128,7 @@ export default function Main(props: any) {
           view={view}
           setView={setView}
           category="username"
+          isMobile={isMobile}
           maxZIndex={maxZIndex}
           setLastPosition={setLastPosition}
           lastPosition={lastPosition}

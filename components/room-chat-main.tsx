@@ -42,7 +42,9 @@ export default function RoomChatMain(props: any) {
     <div
       className="room-chat-main-box"
       style={{
-        height: `${props.roommainHeight - 100}px`,
+        height: props.isMobile
+          ? `${props.roommainHeight - 20}px`
+          : `${props.roommainHeight - 100}px`,
       }}
     >
       {props.messages.map((message: any) => {

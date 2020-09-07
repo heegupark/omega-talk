@@ -46,13 +46,18 @@ export default function Room(props: any) {
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
     const room = props.window._id;
-    socket.on(`room-${room}`, (data: any) => {
-      if (data.data) {
-        setMessages((messages: any) => [...messages, data.data] as any);
-      }
-    });
-    return () => {};
+    if (isMounted) {
+      socket.on(`room-${room}`, (data: any) => {
+        if (data.data) {
+          setMessages((messages: any) => [...messages, data.data] as any);
+        }
+      });
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [props.window._id]);
 
   return (
@@ -62,8 +67,9 @@ export default function Room(props: any) {
         username={props.username}
         roomId={props.window._id}
         messages={messages}
+        isMobile={props.isMobile}
       />
-      <RoomChatInput sendMessage={sendMessage} />
+      <RoomChatInput isMobile={props.isMobile} sendMessage={sendMessage} />
     </div>
   );
 }

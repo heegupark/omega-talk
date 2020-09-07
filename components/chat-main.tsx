@@ -24,18 +24,26 @@ export default function ChatMain(props: any) {
       });
   };
 
-  useEffect(getRooms, []);
+  useEffect(() => {
+    getRooms();
+    return () => {};
+  }, []);
 
   useEffect(() => {
-    socket.on('main', (data: any) => {
-      if (data.success) {
-        setRooms((rooms: any) => [data.data, ...rooms] as any);
-        if (props.username === data.data.owner) {
-          props.openWindow(data.data._id, data.data);
+    let isMounted = true;
+    if (isMounted) {
+      socket.on('main', (data: any) => {
+        if (data.success) {
+          setRooms((rooms: any) => [data.data, ...rooms] as any);
+          if (props.username === data.data.owner) {
+            props.openWindow(data.data._id, data.data);
+          }
         }
-      }
-    });
-    return () => {};
+      });
+    }
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const create = (roomname: String) => {
