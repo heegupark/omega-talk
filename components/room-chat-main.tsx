@@ -3,25 +3,12 @@ import React, { useState, useEffect } from 'react';
 export default function RoomChatMain(props: any) {
   let yesterday: any = null;
   const roomchatRef = React.useRef<HTMLDivElement>(null);
-  const monthNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
   const convertToDay = (dateAt: any) => {
-    const year = new Date(dateAt).getFullYear();
-    const monthName = monthNames[new Date(dateAt).getMonth()];
-    const day = new Date(dateAt).getDay();
-    let date = `${monthName} ${day}, ${year}`;
+    const thisDate = new Date(dateAt);
+    const year = thisDate.toString().split(' ')[3];
+    const month = thisDate.toString().split(' ')[1];
+    const day = thisDate.toString().split(' ')[2];
+    let date = `${month} ${day}, ${year}`;
     return date;
   };
 
@@ -56,9 +43,12 @@ export default function RoomChatMain(props: any) {
         return (
           <div key={message._id}>
             {isDayChanged && (
-              <div className="date-change">{`${convertToDay(
-                message.created
-              )}`}</div>
+              <>
+                <div className="line"></div>
+                <div className="date-change">{`${convertToDay(
+                  message.created
+                )}`}</div>
+              </>
             )}
             {isJoined ? (
               <div className="user-join-room">{`${message.username} joined`}</div>

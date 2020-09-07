@@ -566,10 +566,16 @@ body {
   cursor: default;
 }
 
+.line {
+  width: 95%;
+  border-bottom: 0.1px solid #bababa;
+  margin: 15px auto;
+}
+
 @media (max-resolution: 1dppx) and (max-width: 1024px) and (max-height: 1366px) {
-  .room-main {
+  /* .room-main {
     height: 92%;
-  }
+  } */
 }
 
 @media (max-width: 1199.98px) {

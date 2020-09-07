@@ -1,31 +1,17 @@
 import React from 'react';
 
 export default function ChatMainBody(props: any) {
-  const monthNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
   const convertDate = (dateAt: any) => {
     const today = new Date();
-    const year = new Date(dateAt).getFullYear();
-    const month = new Date(dateAt).getMonth();
-    const monthName = monthNames[new Date(dateAt).getMonth()];
-    const day = new Date(dateAt).getDay();
-    let date = `${monthName} ${day}`;
+    const thisDate = new Date(dateAt);
+    const year = thisDate.toString().split(' ')[3];
+    const month = thisDate.toString().split(' ')[1];
+    const day = thisDate.toString().split(' ')[2];
+    let date = `${month} ${day}`;
     if (
-      today.getFullYear() === year &&
-      today.getMonth() === month &&
-      today.getDay() === day
+      today.toString().split(' ')[3] === year &&
+      today.toString().split(' ')[1] === month &&
+      today.toString().split(' ')[2] === day
     ) {
       date = new Date(dateAt).toLocaleTimeString(navigator.language, {
         hour: '2-digit',
@@ -47,15 +33,6 @@ export default function ChatMainBody(props: any) {
     <div className="chat-main-body">
       {props.rooms.map((room: any) => {
         const date = convertDate(room.updatedAt);
-        const readMessage =
-          room.messages &&
-          room.messages.map((message: any) => {
-            message.read &&
-              message.read.findIndex(
-                (read: any) => read.username === props.username
-              );
-          });
-        const hasNew = readMessage >= 0;
         return (
           <div
             key={room._id}
@@ -65,10 +42,7 @@ export default function ChatMainBody(props: any) {
             <div className="icon-box">
               <i className="far fa-user"></i>
             </div>
-            <div className="room-name">
-              {covertRoomname(room.roomname)}
-              <span>{hasNew ? 'new' : ''}</span>
-            </div>
+            <div className="room-name">{covertRoomname(room.roomname)}</div>
             <div className="room-date">{date}</div>
           </div>
         );

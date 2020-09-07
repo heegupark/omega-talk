@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Window from '../components/window';
+import Disclaimer from '../components/disclaimer';
 import { isTablet } from 'react-device-detect';
 import socketIOClient from 'socket.io-client';
 const socket = socketIOClient(`:${process.env.socketPort}/`);
@@ -11,12 +12,19 @@ export default function Main(props: any) {
   const [username, setUsername] = useState('' as any);
   const [view, setView] = useState('username');
   const [isMobile, setIsMobile] = useState(false);
+  const [isAcceptDisclaimer, setIsAcceptDisclaimer] = useState(false);
 
   useEffect(() => {
     if (document.body.clientWidth <= 600 || isTablet) {
       setIsMobile(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem('omegatalkaccept')) {
+      setIsAcceptDisclaimer(true);
+    }
+  });
 
   useEffect(() => {
     if (localStorage.getItem('omega-talk-username')) {
@@ -134,6 +142,9 @@ export default function Main(props: any) {
           lastPosition={lastPosition}
           setMaxZIndex={setMaxZIndex}
         />
+      )}
+      {!isAcceptDisclaimer && (
+        <Disclaimer setIsAcceptDisclaimer={setIsAcceptDisclaimer} />
       )}
     </>
   );

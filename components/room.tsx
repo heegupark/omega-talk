@@ -12,8 +12,8 @@ export default function Room(props: any) {
     if (socket) {
       socket.emit('chat', {
         _id: props.window._id,
-        roomname: props.window.roomname,
         username: props.username,
+        message: message,
       });
     }
   };
