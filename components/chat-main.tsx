@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ChatMainHead from './chat-main-head';
 import ChatMainBody from './chat-main-body';
 import socketIOClient from 'socket.io-client';
-const socket = socketIOClient(`:${process.env.socketPort}/`);
+const socket = socketIOClient('/');
+// const socket = socketIOClient(`:${process.env.socketPort}/`);
 
 export default function ChatMain(props: any) {
   const [rooms, setRooms] = useState([]);

@@ -3,7 +3,8 @@ import Window from '../components/window';
 import Disclaimer from '../components/disclaimer';
 import { isTablet } from 'react-device-detect';
 import socketIOClient from 'socket.io-client';
-const socket = socketIOClient(`:${process.env.socketPort}/`);
+// const socket = socketIOClient(`:${process.env.socketPort}/`);
+const socket = socketIOClient('/');
 
 export default function Main(props: any) {
   const [maxZIndex, setMaxZIndex] = useState(0);
