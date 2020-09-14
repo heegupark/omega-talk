@@ -69,7 +69,7 @@ export default function CreateChatroom(props: any) {
   const [error, setError] = useState(false);
 
   const handleCreateBtnClick = () => {
-    if (roomname.length < 1) {
+    if (roomname.trim().length < 1) {
       setError(true);
       setLabel('Please type room name');
     } else {
@@ -77,6 +77,12 @@ export default function CreateChatroom(props: any) {
       setLabel('Type room name');
       props.handleClose();
       props.createChatroom(roomname);
+    }
+  };
+
+  const handleEnterCreateRoom = (e: any) => {
+    if (e.key === 'Enter') {
+      handleCreateBtnClick();
     }
   };
 
@@ -92,6 +98,7 @@ export default function CreateChatroom(props: any) {
           variant="outlined"
           size="small"
           value={roomname}
+          onKeyDown={(e) => handleEnterCreateRoom(e)}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setRoomname(e.target.value);
           }}

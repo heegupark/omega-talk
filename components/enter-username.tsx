@@ -15,7 +15,7 @@ export default function EnterUsername(props: any) {
     }
   };
 
-  const handleEnterUSername = (e: any) => {
+  const handleEnterUsername = (e: any) => {
     if (e.key === 'Enter') {
       handleEnterBtnClick();
     }
@@ -43,7 +43,7 @@ export default function EnterUsername(props: any) {
           className="enter-username-input"
           value={username}
           placeholder={label}
-          onKeyDown={(e) => handleEnterUSername(e)}
+          onKeyDown={(e) => handleEnterUsername(e)}
           onChange={(e) => setUsername(e.target.value)}
         ></input>
       </div>

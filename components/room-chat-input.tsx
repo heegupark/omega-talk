@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 
 export default function RoomChatInput(props: any) {
   const [message, setMessage] = useState('');
-  const handleSendBtnClick = () => {
+  const handleSendBtnClick = (e: any) => {
     if (message.trim().length > 0) {
       props.sendMessage(message);
       setMessage('');
+      e.target.reset();
     }
   };
   const handleEnterMessage = (e: any) => {
     if (e.key === 'Enter') {
-      handleSendBtnClick();
+      handleSendBtnClick(e);
     }
   };
   return (
@@ -20,7 +21,13 @@ export default function RoomChatInput(props: any) {
           <input
             value={message}
             onKeyDown={(e) => handleEnterMessage(e)}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.trim().length < 1) {
+                setMessage(e.target.value.trim());
+              } else {
+                setMessage(e.target.value);
+              }
+            }}
             className="room-chat-input-mobile"
           />
           <button
