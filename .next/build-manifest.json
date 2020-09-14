@@ -5,15 +5,15 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/tPV6z0SA6P1wxHHgeOhTq/_buildManifest.js",
-    "static/tPV6z0SA6P1wxHHgeOhTq/_ssgManifest.js"
+    "static/ruWEkYy-XUg-GiwY-HPzc/_buildManifest.js",
+    "static/ruWEkYy-XUg-GiwY-HPzc/_ssgManifest.js"
   ],
   "pages": {
     "/": [
       "static/chunks/main-270a02297826a43b2a25.js",
       "static/chunks/webpack-ccf5ab034a524403276a.js",
       "static/chunks/framework.0af185ce84f114f60bdc.js",
-      "static/chunks/pages/index-d7b6fe24e1145b93f2e8.js"
+      "static/chunks/pages/index-c190d8808b8f3db21b7b.js"
     ],
     "/_app": [
       "static/chunks/main-270a02297826a43b2a25.js",

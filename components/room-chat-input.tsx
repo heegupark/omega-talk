@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 
 export default function RoomChatInput(props: any) {
   const [message, setMessage] = useState('');
-  const handleSendBtnClick = (e: any) => {
+  const handleSendBtnClick = () => {
     if (message.trim().length > 0) {
       props.sendMessage(message);
       setMessage('');
-      e.target.reset();
     }
   };
   const handleEnterMessage = (e: any) => {
     if (e.key === 'Enter') {
-      handleSendBtnClick(e);
+      handleSendBtnClick();
     }
   };
   return (
