@@ -8,7 +8,11 @@ export default function RoomChatInput(props: any) {
       setMessage('');
     }
   };
-  console.log();
+  const handleEnterMessage = (e: any) => {
+    if (e.key === 'Enter') {
+      handleSendBtnClick();
+    }
+  };
   return (
     <>
       {props.isMobile ? (
@@ -32,6 +36,7 @@ export default function RoomChatInput(props: any) {
         <div className="room-chat-input-box">
           <textarea
             value={message}
+            onKeyDown={(e) => handleEnterMessage(e)}
             onChange={(e) => setMessage(e.target.value)}
             className="room-chat-input"
           ></textarea>

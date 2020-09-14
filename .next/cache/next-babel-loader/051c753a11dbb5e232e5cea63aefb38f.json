@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nexport default function Footer() {\n  return __jsx(\"footer\", null, __jsx(\"p\", {\n    className: \"omega-footer\"\n  }, \"\\xA9 2020 Omegathrone makes\"));\n}","map":null,"metadata":{},"sourceType":"module"}
