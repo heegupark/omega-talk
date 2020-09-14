@@ -82,6 +82,7 @@ export default function CreateChatroom(props: any) {
 
   const handleEnterCreateRoom = (e: any) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       handleCreateBtnClick();
     }
   };

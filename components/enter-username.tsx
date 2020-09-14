@@ -17,6 +17,7 @@ export default function EnterUsername(props: any) {
 
   const handleEnterUsername = (e: any) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       handleEnterBtnClick();
     }
   };

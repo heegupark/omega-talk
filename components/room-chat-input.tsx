@@ -10,6 +10,7 @@ export default function RoomChatInput(props: any) {
   };
   const handleEnterMessage = (e: any) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       handleSendBtnClick();
     }
   };
