@@ -20,6 +20,7 @@ export default function RoomChatInput(props: any) {
         <div className="room-chat-input-box-mobile">
           <input
             value={message}
+            autoFocus
             onKeyDown={(e) => handleEnterMessage(e)}
             onChange={(e) => {
               if (e.target.value.trim().length < 1) {
@@ -44,6 +45,7 @@ export default function RoomChatInput(props: any) {
         <div className="room-chat-input-box">
           <textarea
             value={message}
+            autoFocus
             onKeyDown={(e) => handleEnterMessage(e)}
             onChange={(e) => setMessage(e.target.value)}
             className="room-chat-input"

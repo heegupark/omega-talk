@@ -44,6 +44,7 @@ export default function EnterUsername(props: any) {
           className="enter-username-input"
           value={username}
           placeholder={label}
+          autoFocus
           onKeyDown={(e) => handleEnterUsername(e)}
           onChange={(e) => setUsername(e.target.value)}
         ></input>

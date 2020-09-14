@@ -98,6 +98,7 @@ export default function CreateChatroom(props: any) {
           label={label}
           variant="outlined"
           size="small"
+          autoFocus
           value={roomname}
           onKeyDown={(e) => handleEnterCreateRoom(e)}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
