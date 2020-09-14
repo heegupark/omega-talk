@@ -6,7 +6,7 @@ export default function EnterUsername(props: any) {
   const [label, setLabel] = useState('Enter username');
 
   const handleEnterBtnClick = () => {
-    if (username.length < 1) {
+    if (username.trim().length < 1) {
       setLabel('Please enter username');
     } else {
       localStorage.setItem('omega-talk-username', username);
